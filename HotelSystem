@@ -1,13 +1,12 @@
 public class HotelSystem {
     reservation[] reservations;
     int  numofreservations;
-   customer[] customers;
-  int  customersnum;
+
 public HotelSystem(int maxRes, int maxCust) {
     this.reservations = new reservation[maxRes];
-    this.customers = new customer[maxCust];
+  
     this.numofreservations = 0;
-    this.customersnum = 0;
+   
 }
  public boolean addreservation(reservation reservation) {
      if (numofreservations < reservations.length) {
@@ -58,7 +57,22 @@ private double calculateTotalRevenue(int num) {
     if (num >= numofreservations) {
         return 0.0;
     }
-    double price = reservations[num].calculatePrice();
+    char stat = reservations[num].getStatus() ;
+double multiplier = 0;
+    switch (stat) {
+        case 'D':
+        multiplier = 1;
+        break;
+         case 'R':
+              multiplier = 0;
+        break;
+         case 'C':
+         case 'I':
+                      multiplier = 0.5;
+        break;
+
+    }
+    double price = reservations[num].calculatePrice()*multiplier;
     return price + calculateTotalRevenue(num + 1);
 }
 }
