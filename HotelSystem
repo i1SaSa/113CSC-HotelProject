@@ -1,0 +1,66 @@
+public class HotelSystem {
+    reservation[] reservations;
+    int  numofreservations;
+   customer[] customers;
+  int  customersnum;
+public HotelSystem(int maxRes, int maxCust) {
+    this.reservations = new reservation[maxRes];
+    this.customers = new customer[maxCust];
+    this.numofreservations = 0;
+    this.customersnum = 0;
+}
+ public boolean addreservation(reservation reservation) {
+     if (numofreservations < reservations.length) {
+         reservations[numofreservations] = reservation;
+         numofreservations++;
+         return true;
+     } 
+         System.out.println("Error: Cannot add reservation. Maximum capacity reached.");
+         return false;
+     
+ }
+ public boolean removereservation(String resID) {
+     for (int i = 0; i < numofreservations; i++) {
+         if (reservations[i].getResID().equals(resID)) {
+             for (int j = i; j < numofreservations - 1; j++) {
+                 reservations[j] = reservations[j + 1];
+             }
+             reservations[numofreservations - 1] = null;
+             numofreservations--;
+             return true;
+         }
+     }
+     System.out.println("Error: Reservation with ID " + resID + " not found.");
+     return false;
+ }
+ public int searchreservation(String resID) {
+     for (int i = 0; i < numofreservations; i++) {
+         if (reservations[i].getResID().equals(resID)) {
+             return i;
+         }
+     }
+     return -1; 
+ }
+ public boolean addreservation(reservation[] reservation){
+for (int i = 0; i < reservation.length; i++) {
+    if (!addreservation(reservation[i])) {
+        return !addreservation(reservation[i]); 
+    }
+
+ }
+ return true;
+}
+public double calculateTotalRevenue() {
+return calculateTotalRevenue(0);}
+//to insure the recursion works correctly we start at 0
+private double calculateTotalRevenue(int num) {
+    
+    if (num >= numofreservations) {
+        return 0.0;
+    }
+    double price = reservations[num].calculatePrice();
+    return price + calculateTotalRevenue(num + 1);
+}
+}
+
+
