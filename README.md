@@ -1,4 +1,10 @@
 # 113CSC-HotelProject
+
+
+
+
+
+```mermaid
 classDiagram
     class ComesWithDesignatedParking {
         <<interface>>
@@ -105,3 +111,4 @@ classDiagram
     
     HotelSystem o-- "*" Customer 
     Reservation o-- "1" Customer
+```
