@@ -43,7 +43,7 @@ public HotelSystem(int maxRes, int maxCust) {
  public boolean addreservation(reservation[] reservation){
 for (int i = 0; i < reservation.length; i++) {
     if (!addreservation(reservation[i])) {
-        return !addreservation(reservation[i]); 
+        return false; 
     }
 
  }
