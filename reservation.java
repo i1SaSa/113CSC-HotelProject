@@ -1,44 +1,57 @@
 
-
-
+import java.time.*;
 
 public abstract  class reservation {
+    protected customer guest;
 protected String resID;
-protected Date date;
+protected LocalDate date;
+
 protected int price;
-protected boolean isreserved;
-public reservation(String resID, int day,int month,int year, int price) {
+protected char status;
+
+
+public reservation(String resID, int day,int month,int year, int price, customer guest) {
     this.resID = resID;
-    this.date = new Date( day,  month,  year) ;
+    this.date = LocalDate.of(year, month, day);
     this.price = price;
-    this.isreserved = true;
+    this.status = 'R';
+    this.guest = guest;
 }
 public String getResID() {
     return resID;
 }
+public char getStatus() {
+    return status;
+}
+public void setStatus(char status) {
+    this.status = status;
+}
 public void setResID(String resID) {
     this.resID = resID;
 }
-public String getDate() {
-    return date.getDate();
+
+public customer getGuest() {
+    return guest;
 }
-public void setDate(int day,int month,int year) {
-    date.setDay( day);
-     date.setMonth( month);
-     date.setYear( year);
+public LocalDate getDate() {
+    return date;
 }
+public void setDate(LocalDate date) {
+    this.date = date;
+}
+public void setGuest(customer guest) {
+    this.guest = guest;
+}
+
+
 public int getPrice() {
     return price;
 }
 public void setPrice(int price) {
     this.price = price;
 }
-public boolean isIsreserved() {
-    return isreserved;
-}
-public void setIsreserved(boolean isreserved) {
-    this.isreserved = isreserved;
-}
+
+
 abstract int calculatePrice();
 
 }
