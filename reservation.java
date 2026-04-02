@@ -1,66 +1,74 @@
+public abstract class Reservation {
+    protected String resID;
+    protected int price;
+    protected char status;
+    protected Customer guest;
+    protected Date date;
+    // Possible status: A (Active), R (Refunded), C (Cancelled), F (Finished)
 
-import java.time.*;
-
-public abstract  class reservation {
-protected customer guest;
-protected String resID;
-protected LocalDate date;
-protected int price;
-protected char status;
-//possible status: A (active), R (refunded), C (cancelled), I (In progress)
-
-public reservation(String resID, int day,int month,int year, int price, customer guest) {
-    this.resID = resID;
-    this.date = LocalDate.of(year, month, day);
-    this.price = price;
-    this.status = 'I';
-    this.guest = guest;
-}
-public String getResID() {
-    return resID;
-}
-public char getStatus() {
-    return status;
-}
-public void setStatus(char status) {
-    status = Character.toUpperCase(status);
-this.status = status;
-    if ("ARCF".indexOf(status) == -1) {
-        this.status = 'R';
-        System.out.println("Invalid status. Status set to 'R' (refunded) by default.");
+    public Reservation(String resID, int day, int month, int year, int price, Customer guest) {
+        this.resID = resID;
+        this.date = new Date(day, month, year);
+        this.price = price;
+        this.status = 'A'; // Active by default
+        this.guest = guest;
     }
-}
-public void setResID(String resID) {
-    this.resID = resID;
-}
 
-public customer getGuest() {
-    return guest;
-}
-public LocalDate getDate() {
-    return date;
-}
-public void setDate(LocalDate date) {
-      this.date = date;
-    if (date.isBefore(LocalDate.now())) {
-        this.date = LocalDate.now();
-        System.out.println("Error: Date cannot be in the past. Date set to today by default.");
+    public String getResID() {
+        return resID;
     }
-      
-}
-public void setGuest(customer guest) {
-    this.guest = guest;
-}
 
+    public void setResID(String resID) {
+        this.resID = resID;
+    }
 
-public int getPrice() {
-    return price;
-}
-public void setPrice(int price) {
-    this.price = price;
-}
+    public char getStatus() {
+        return status;
+    }
 
+    public void setStatus(char status) {
+        status = Character.toUpperCase(status);
+        if ("ARCF".indexOf(status) != -1) {
+            this.status = status;
+        } else {
+            this.status = 'R';
+            System.out.println("Invalid status. Status set to 'R' (Refunded) by default.");
+        }
+    }
 
-abstract int calculatePrice();
+    public Customer getGuest() {
+        return guest;
+    }
 
+    public void setGuest(Customer guest) {
+        this.guest = guest;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(int day, int month, int year) {
+        this.date = new Date(day, month, year);
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    // Polymorphic method — each subclass calculates price differently
+    public abstract int calculatePrice();
+
+    @Override
+    public String toString() {
+        return "Reservation ID: " + resID
+                + " | Guest: " + (guest != null ? guest.getName() : "N/A")
+                + " | Date: " + date.getDate()
+                + " | Status: " + status
+                + " | Price: " + calculatePrice() + " SAR";
+    }
 }
