@@ -1,6 +1,6 @@
 public class EventHall extends EventSpace {
     private boolean hasStage;
-    private static final int PRICE_PER_SQFT = 20;
+    private static final double PRICE_PER_SQFT = 20.0;
 
     public EventHall(String resID, int day, int month, int year,
                      Customer guest, int maxCapacity, int sizeInSqFt, boolean hasStage) {
@@ -12,8 +12,8 @@ public class EventHall extends EventSpace {
     public void setHasStage(boolean hasStage) { this.hasStage = hasStage; }
 
     @Override
-    public int calculatePrice() {
-        int total = price * sizeInSqFt;
+    public double calculatePrice() {
+        double total = price * sizeInSqFt;
         if (hasStage) total += 2000;
         return total;
     }

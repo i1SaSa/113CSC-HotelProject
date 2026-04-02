@@ -1,5 +1,5 @@
 public class Lobby extends EventSpace {
-    private static final int PRICE_PER_SQFT = 10;
+    private static final double PRICE_PER_SQFT = 10.0;
 
     public Lobby(String resID, int day, int month, int year,
                  Customer guest, int maxCapacity, int sizeInSqFt) {
@@ -7,7 +7,7 @@ public class Lobby extends EventSpace {
     }
 
     @Override
-    public int calculatePrice() {
+    public double calculatePrice() {
         return price * sizeInSqFt;
     }
 

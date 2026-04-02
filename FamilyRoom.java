@@ -1,8 +1,8 @@
 public class FamilyRoom extends Room {
     private boolean hasKitchenette;
     private int extraCots;
-    private static final int BASE_PRICE_PER_NIGHT = 500;
-    private static final int COT_PRICE = 75;
+    private static final double BASE_PRICE_PER_NIGHT = 500.0;
+    private static final double COT_PRICE = 75.0;
 
     public FamilyRoom(String resID, int day, int month, int year,
                       Customer guest, int beds, String roomNumber,
@@ -14,7 +14,6 @@ public class FamilyRoom extends Room {
 
     public boolean isHasKitchenette() { return hasKitchenette; }
     public void setHasKitchenette(boolean hasKitchenette) { this.hasKitchenette = hasKitchenette; }
-
     public int getExtraCots() { return extraCots; }
 
     public void addCot() {
@@ -23,8 +22,8 @@ public class FamilyRoom extends Room {
     }
 
     @Override
-    public int calculatePrice() {
-        int total = price * numberOfNights;
+    public double calculatePrice() {
+        double total = price * numberOfNights;
         if (hasKitchenette) total += 100 * numberOfNights;
         total += extraCots * COT_PRICE * numberOfNights;
         return total;

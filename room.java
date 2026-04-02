@@ -4,7 +4,7 @@ public abstract class Room extends Reservation {
     protected boolean isOccupied;
     protected int numberOfNights;
 
-    public Room(String resID, int day, int month, int year, int price,
+    public Room(String resID, int day, int month, int year, double price,
                 Customer guest, int beds, String roomNumber, int numberOfNights) {
         super(resID, day, month, year, price, guest);
         this.beds = beds;
@@ -46,5 +46,5 @@ public abstract class Room extends Reservation {
     }
 
     @Override
-    public abstract int calculatePrice();
+    public abstract double calculatePrice();
 }

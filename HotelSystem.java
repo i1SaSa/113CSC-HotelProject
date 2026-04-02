@@ -1,12 +1,12 @@
 public class HotelSystem {
     private Reservation[] reservations;
-    private int numOfReservations;
+    private int numOfRes;
     private Customer[] customers;
     private int numOfCustomers;
 
     public HotelSystem(int maxReservations, int maxCustomers) {
         this.reservations = new Reservation[maxReservations];
-        this.numOfReservations = 0;
+        this.numOfRes = 0;
         this.customers = new Customer[maxCustomers];
         this.numOfCustomers = 0;
     }
@@ -23,77 +23,29 @@ public class HotelSystem {
         return false;
     }
 
-    public boolean removeCustomer(String customerID) {
+    public boolean removeCustomer(String name) {
         for (int i = 0; i < numOfCustomers; i++) {
-            if (customers[i].getCustomerID().equals(customerID)) {
+            if (customers[i].getName().equals(name)) {
                 for (int j = i; j < numOfCustomers - 1; j++) {
                     customers[j] = customers[j + 1];
                 }
                 customers[numOfCustomers - 1] = null;
                 numOfCustomers--;
+                System.out.println("Customer " + name + " removed successfully.");
                 return true;
             }
         }
-        System.out.println("Error: Customer with ID " + customerID + " not found.");
+        System.out.println("Error: Customer " + name + " not found.");
         return false;
     }
 
-    public Customer searchCustomer(String customerID) {
+    public Customer searchCustomer(String name) {
         for (int i = 0; i < numOfCustomers; i++) {
-            if (customers[i].getCustomerID().equals(customerID)) {
+            if (customers[i].getName().equals(name)) {
                 return customers[i];
             }
         }
         return null;
-    }
-
-    // ─── Reservation methods ────────────────────────────────────────────────
-
-    public boolean addReservation(Reservation reservation) {
-        if (numOfReservations < reservations.length) {
-            reservations[numOfReservations] = reservation;
-            numOfReservations++;
-            return true;
-        }
-        System.out.println("Error: Cannot add reservation. Maximum capacity reached.");
-        return false;
-    }
-
-    public boolean removeReservation(String resID) {
-        for (int i = 0; i < numOfReservations; i++) {
-            if (reservations[i].getResID().equals(resID)) {
-                for (int j = i; j < numOfReservations - 1; j++) {
-                    reservations[j] = reservations[j + 1];
-                }
-                reservations[numOfReservations - 1] = null;
-                numOfReservations--;
-                System.out.println("Reservation " + resID + " removed successfully.");
-                return true;
-            }
-        }
-        System.out.println("Error: Reservation with ID " + resID + " not found.");
-        return false;
-    }
-
-    public int searchReservation(String resID) {
-        for (int i = 0; i < numOfReservations; i++) {
-            if (reservations[i].getResID().equals(resID)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public void displayAllReservations() {
-        if (numOfReservations == 0) {
-            System.out.println("No reservations found.");
-            return;
-        }
-        System.out.println("\n========== All Reservations ==========");
-        for (int i = 0; i < numOfReservations; i++) {
-            System.out.println(reservations[i]);
-        }
-        System.out.println("======================================");
     }
 
     public void displayAllCustomers() {
@@ -108,26 +60,72 @@ public class HotelSystem {
         System.out.println("===================================");
     }
 
+    // ─── Reservation methods ────────────────────────────────────────────────
+
+    public boolean addReservation(Reservation reservation) {
+        if (numOfRes < reservations.length) {
+            reservations[numOfRes] = reservation;
+            numOfRes++;
+            return true;
+        }
+        System.out.println("Error: Cannot add reservation. Maximum capacity reached.");
+        return false;
+    }
+
+    public boolean removeReservation(String resID) {
+        for (int i = 0; i < numOfRes; i++) {
+            if (reservations[i].getResID().equals(resID)) {
+                for (int j = i; j < numOfRes - 1; j++) {
+                    reservations[j] = reservations[j + 1];
+                }
+                reservations[numOfRes - 1] = null;
+                numOfRes--;
+                System.out.println("Reservation " + resID + " removed successfully.");
+                return true;
+            }
+        }
+        System.out.println("Error: Reservation " + resID + " not found.");
+        return false;
+    }
+
+    public int searchReservation(String resID) {
+        for (int i = 0; i < numOfRes; i++) {
+            if (reservations[i].getResID().equals(resID)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void displayAllReservations() {
+        if (numOfRes == 0) {
+            System.out.println("No reservations found.");
+            return;
+        }
+        System.out.println("\n========== All Reservations ==========");
+        for (int i = 0; i < numOfRes; i++) {
+            System.out.println(reservations[i]);
+        }
+        System.out.println("======================================");
+    }
+
     // ─── Recursive revenue calculation ─────────────────────────────────────
 
     public double calculateTotalRevenue() {
         return calculateTotalRevenue(0);
     }
 
-    private double calculateTotalRevenue(int index) {
-        if (index >= numOfReservations) {
-            return 0.0;
-        }
+    public double calculateTotalRevenue(int index) {
+        if (index >= numOfRes) return 0.0;
         char stat = reservations[index].getStatus();
         double multiplier;
         switch (stat) {
-            case 'F': multiplier = 1.0;  break; // Finished = full payment
-            case 'A': multiplier = 0.0;  break; // Active = not yet paid
-            case 'C': multiplier = 0.5;  break; // Cancelled = 50% penalty
-            case 'R': multiplier = 0.0;  break; // Refunded = no revenue
-            default:   multiplier = 0.0;  break;
+            case 'F': multiplier = 1.0; break; // Finished = full payment
+            case 'C': multiplier = 0.5; break; // Cancelled = 50% penalty
+            case 'A': // Active = not yet paid
+            case 'R': // Refunded = no revenue
+            default:  multiplier = 0.0; break;
         }
-        double revenue = reservations[index].calculatePrice() * multiplier;
-        return revenue + calculateTotalRevenue(index + 1);
+        return reservations[index].calculatePrice() * multiplier + calculateTotalRevenue(index + 1);
     }
 }

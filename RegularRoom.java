@@ -1,7 +1,6 @@
 public class RegularRoom extends Room {
     private boolean hasMiniFridge;
-    // Base price per night for a regular room
-    private static final int BASE_PRICE_PER_NIGHT = 300;
+    private static final double BASE_PRICE_PER_NIGHT = 300.0;
 
     public RegularRoom(String resID, int day, int month, int year,
                        Customer guest, int beds, String roomNumber,
@@ -14,9 +13,9 @@ public class RegularRoom extends Room {
     public void setHasMiniFridge(boolean hasMiniFridge) { this.hasMiniFridge = hasMiniFridge; }
 
     @Override
-    public int calculatePrice() {
-        int total = price * numberOfNights;
-        if (hasMiniFridge) total += 50; // extra for mini fridge
+    public double calculatePrice() {
+        double total = price * numberOfNights;
+        if (hasMiniFridge) total += 50;
         return total;
     }
 
