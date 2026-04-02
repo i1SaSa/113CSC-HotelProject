@@ -69,6 +69,7 @@ public class HotelTester {
             System.out.println("2. Add Event Space Reservation");
             System.out.println("3. Remove Reservation");
             System.out.println("4. Search Reservation");
+            System.out.println("5. Update Reservation Status");
             System.out.println("0. Back to Main Menu");
             System.out.print("Your choice: ");
             c = readInt();
@@ -77,6 +78,7 @@ public class HotelTester {
                 case 2: addEventReservation(); break;
                 case 3: removeReservation();   break;
                 case 4: searchReservation();   break;
+                case 5: updateReservationStatus(); break;
                 case 0: break;
                 default: System.out.println("Invalid choice.");
             }
@@ -228,6 +230,31 @@ public class HotelTester {
         else
             System.out.println("Reservation not found.");
     }
+      static void updateReservationStatus() {
+          if (hotel.getNumOfRes() == 0) {
+            System.out.println("No reservations found. Please add a reservation first.");
+            return;
+        }
+        System.out.print("Enter Reservation ID to update: ");
+        String id = sc.nextLine().trim();
+        Reservation res = hotel.getReservation(id);
+        if (res != null) {
+            System.out.println("Current Status: " + res.getStatus());
+            System.out.println("Update Status to: 1. Active (A)  2. Finished (F)  3. Cancelled (C)  4. Refunded (R)");
+            System.out.print("Your choice: ");
+            int choice = readInt();
+            switch (choice) {
+                case 1: res.setStatus('A'); break;
+                case 2: res.setStatus('F'); break;
+                case 3: res.setStatus('C'); break;
+                case 4: res.setStatus('R'); break;
+                default: System.out.println("Invalid choice.");
+            }
+        } else {
+            System.out.println("Reservation not found.");
+        }
+    }
+
 
     // ─── Helper ─────────────────────────────────────────────────────────────
 
