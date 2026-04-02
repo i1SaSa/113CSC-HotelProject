@@ -25,7 +25,6 @@ classDiagram
         +searchCustomer(name: String) Customer
         +displayAllReservations() void
         +displayAllCustomers() void
-        +updareReservationStatus() void
 
     }
 
