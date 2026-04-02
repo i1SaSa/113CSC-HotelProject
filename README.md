@@ -16,6 +16,7 @@ classDiagram
         -numOfRes : int
         -customers : Customer[]
         -numOfCustomers : int
+        -numOfCustomers : int
         +addReservation(r: Reservation) boolean
         +removeReservation(id: String) boolean
         +searchReservation(id: String) int
@@ -55,9 +56,12 @@ classDiagram
         #date : Date
         +calculatePrice()* double
         +getResID() String
+        +getResID() String
         +getGuest() Customer
         +getStatus() char
         +setStatus(s: char) void
+        +getDate() Date
+        +getPrice() double
         +getDate() Date
         +getPrice() double
     }
@@ -75,6 +79,10 @@ classDiagram
         +getRoomNumber() String
         +isOccupied() boolean
         +getNumberOfNights() int
+        +getBeds() int
+        +getRoomNumber() String
+        +isOccupied() boolean
+        +getNumberOfNights() int
     }
 
     class EventSpace {
@@ -84,19 +92,25 @@ classDiagram
         +calculatePrice() double
         +getMaxCapacity() int
         +getSizeInSqFt() int
+        +getMaxCapacity() int
+        +getSizeInSqFt() int
     }
 
     class RegularRoom {
         -hasMiniFridge : boolean
         +calculatePrice() double
         +isHasMiniFridge() boolean
+        +isHasMiniFridge() boolean
     }
 
     class FamilyRoom {
         -hasKitchenette : boolean
         -extraCots : int
+        -extraCots : int
         +addCot() void
         +calculatePrice() double
+        +isHasKitchenette() boolean
+        +getExtraCots() int
         +isHasKitchenette() boolean
         +getExtraCots() int
     }
@@ -106,6 +120,7 @@ classDiagram
         +calculatePrice() double
         +assignParking() void
         +isHasBalcony() boolean
+        +isHasBalcony() boolean
     }
 
     class Lobby {
@@ -114,7 +129,9 @@ classDiagram
 
     class EventHall {
         -hasStage : boolean
+        -hasStage : boolean
         +calculatePrice() double
+        +isHasStage() boolean
         +isHasStage() boolean
     }
 
@@ -134,5 +151,6 @@ classDiagram
     
     HotelSystem o-- "*" Customer 
     Reservation o-- "1" Customer
+
 
 ```
