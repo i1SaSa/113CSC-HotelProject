@@ -15,10 +15,18 @@ classDiagram
         -reservations : Reservation[]
         -numOfRes : int
         -customers : Customer[]
+        -numOfCustomers : int
         +addReservation(r: Reservation) boolean
         +removeReservation(id: String) boolean
         +searchReservation(id: String) int
         +calculateTotalRevenue(index: int) double
+        +addCustomer(c: Customer) boolean
+        +removeCustomer(name: String) boolean
+        +searchCustomer(name: String) Customer
+        +displayAllReservations() void
+        +displayAllCustomers() void
+        +updareReservationStatus() void
+
     }
 
     class Date {
@@ -47,9 +55,12 @@ classDiagram
         #guest : Customer
         #date : Date
         +calculatePrice()* double
+        +getResID() String
         +getGuest() Customer
         +getStatus() char
         +setStatus(s: char) void
+        +getDate() Date
+        +getPrice() double
     }
 
     class Room {
@@ -61,6 +72,10 @@ classDiagram
         +checkIn() void
         +checkOut() void
         +calculatePrice() double
+        +getBeds() int
+        +getRoomNumber() String
+        +isOccupied() boolean
+        +getNumberOfNights() int
     }
 
     class EventSpace {
@@ -68,23 +83,30 @@ classDiagram
         #maxCapacity : int
         #sizeInSqFt : int
         +calculatePrice() double
+        +getMaxCapacity() int
+        +getSizeInSqFt() int
     }
 
     class RegularRoom {
         -hasMiniFridge : boolean
         +calculatePrice() double
+        +isHasMiniFridge() boolean
     }
 
     class FamilyRoom {
         -hasKitchenette : boolean
+        -extraCots : int
         +addCot() void
         +calculatePrice() double
+        +isHasKitchenette() boolean
+        +getExtraCots() int
     }
 
     class Suite {
         -hasBalcony : boolean
         +calculatePrice() double
         +assignParking() void
+        +isHasBalcony() boolean
     }
 
     class Lobby {
@@ -92,7 +114,9 @@ classDiagram
     }
 
     class EventHall {
+        -hasStage : boolean
         +calculatePrice() double
+        +isHasStage() boolean
     }
 
     Reservation <|-- Room 
@@ -111,4 +135,5 @@ classDiagram
     
     HotelSystem o-- "*" Customer 
     Reservation o-- "1" Customer
+
 ```
