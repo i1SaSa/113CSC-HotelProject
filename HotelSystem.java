@@ -11,6 +11,9 @@ public class HotelSystem {
         this.numOfCustomers = 0;
     }
 
+    public int getNumOfCustomers() { return numOfCustomers; }
+    public int getNumOfRes() { return numOfRes; }
+
     // ─── Customer methods ───────────────────────────────────────────────────
 
     public boolean addCustomer(Customer customer) {
@@ -63,6 +66,11 @@ public class HotelSystem {
     // ─── Reservation methods ────────────────────────────────────────────────
 
     public boolean addReservation(Reservation reservation) {
+        // Check for duplicate ID
+        if (searchReservation(reservation.getResID()) != -1) {
+            System.out.println("Error: Reservation ID '" + reservation.getResID() + "' already exists.");
+            return false;
+        }
         if (numOfRes < reservations.length) {
             reservations[numOfRes] = reservation;
             numOfRes++;
@@ -95,6 +103,11 @@ public class HotelSystem {
             }
         }
         return -1;
+    }
+
+    public Reservation getReservation(String resID) {
+        int idx = searchReservation(resID);
+        return idx != -1 ? reservations[idx] : null;
     }
 
     public void displayAllReservations() {

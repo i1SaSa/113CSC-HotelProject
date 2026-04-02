@@ -42,32 +42,44 @@ public class HotelTester {
     }
 
     static void manageCustomers() {
-        System.out.println("\n--- Customer Menu ---");
-        System.out.println("1. Add Customer");
-        System.out.println("2. Remove Customer");
-        System.out.println("3. Search Customer");
-        System.out.print("Your choice: ");
-        switch (readInt()) {
-            case 1: addCustomer();    break;
-            case 2: removeCustomer(); break;
-            case 3: searchCustomer(); break;
-            default: System.out.println("Invalid choice.");
+        int c = -1;
+        while (c != 0) {
+            System.out.println("\n--- Customer Menu ---");
+            System.out.println("1. Add Customer");
+            System.out.println("2. Remove Customer");
+            System.out.println("3. Search Customer");
+            System.out.println("0. Back to Main Menu");
+            System.out.print("Your choice: ");
+            c = readInt();
+            switch (c) {
+                case 1: addCustomer();    break;
+                case 2: removeCustomer(); break;
+                case 3: searchCustomer(); break;
+                case 0: break;
+                default: System.out.println("Invalid choice.");
+            }
         }
     }
 
     static void manageReservations() {
-        System.out.println("\n--- Reservation Menu ---");
-        System.out.println("1. Add Room Reservation");
-        System.out.println("2. Add Event Space Reservation");
-        System.out.println("3. Remove Reservation");
-        System.out.println("4. Search Reservation");
-        System.out.print("Your choice: ");
-        switch (readInt()) {
-            case 1: addRoomReservation();  break;
-            case 2: addEventReservation(); break;
-            case 3: removeReservation();   break;
-            case 4: searchReservation();   break;
-            default: System.out.println("Invalid choice.");
+        int c = -1;
+        while (c != 0) {
+            System.out.println("\n--- Reservation Menu ---");
+            System.out.println("1. Add Room Reservation");
+            System.out.println("2. Add Event Space Reservation");
+            System.out.println("3. Remove Reservation");
+            System.out.println("4. Search Reservation");
+            System.out.println("0. Back to Main Menu");
+            System.out.print("Your choice: ");
+            c = readInt();
+            switch (c) {
+                case 1: addRoomReservation();  break;
+                case 2: addEventReservation(); break;
+                case 3: removeReservation();   break;
+                case 4: searchReservation();   break;
+                case 0: break;
+                default: System.out.println("Invalid choice.");
+            }
         }
     }
 
@@ -85,11 +97,19 @@ public class HotelTester {
     }
 
     static void removeCustomer() {
+        if (hotel.getNumOfCustomers() == 0) {
+            System.out.println("No customers found. Please add a customer first.");
+            return;
+        }
         System.out.print("Enter Customer Name to remove: ");
         hotel.removeCustomer(sc.nextLine().trim());
     }
 
     static void searchCustomer() {
+        if (hotel.getNumOfCustomers() == 0) {
+            System.out.println("No customers found. Please add a customer first.");
+            return;
+        }
         System.out.print("Enter Customer Name to search: ");
         Customer c = hotel.searchCustomer(sc.nextLine().trim());
         System.out.println(c != null ? "Found: " + c : "Customer not found.");
@@ -187,14 +207,26 @@ public class HotelTester {
     }
 
     static void removeReservation() {
+        if (hotel.getNumOfRes() == 0) {
+            System.out.println("No reservations found. Please add a reservation first.");
+            return;
+        }
         System.out.print("Enter Reservation ID to remove: ");
         hotel.removeReservation(sc.nextLine().trim());
     }
 
     static void searchReservation() {
+        if (hotel.getNumOfRes() == 0) {
+            System.out.println("No reservations found. Please add a reservation first.");
+            return;
+        }
         System.out.print("Enter Reservation ID to search: ");
-        int idx = hotel.searchReservation(sc.nextLine().trim());
-        System.out.println(idx != -1 ? "Reservation found at index " + idx + "." : "Reservation not found.");
+        String id = sc.nextLine().trim();
+        Reservation res = hotel.getReservation(id);
+        if (res != null)
+            System.out.println("Reservation found:\n" + res);
+        else
+            System.out.println("Reservation not found.");
     }
 
     // ─── Helper ─────────────────────────────────────────────────────────────
