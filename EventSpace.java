@@ -3,7 +3,8 @@ public abstract class EventSpace extends Reservation {
     protected int sizeInSqFt;
 
     public EventSpace(String resID, int day, int month, int year, double price,
-                      Customer guest, int maxCapacity, int sizeInSqFt) {
+                      Customer guest, int maxCapacity, int sizeInSqFt)throws 
+                      InvalidDateException {
         super(resID, day, month, year, price, guest);
         this.maxCapacity = maxCapacity;
         this.sizeInSqFt = sizeInSqFt;
