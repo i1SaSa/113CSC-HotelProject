@@ -4,7 +4,7 @@ public class RegularRoom extends Room {
 
     public RegularRoom(String resID, int day, int month, int year,
                        Customer guest, int beds, String roomNumber,
-                       int numberOfNights, boolean hasMiniFridge) {
+                       int numberOfNights, boolean hasMiniFridge) throws InvalidDateException {
         super(resID, day, month, year, BASE_PRICE_PER_NIGHT, guest, beds, roomNumber, numberOfNights);
         this.hasMiniFridge = hasMiniFridge;
     }
