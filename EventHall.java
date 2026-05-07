@@ -3,7 +3,7 @@ public class EventHall extends EventSpace {
     private static final double PRICE_PER_SQFT = 20.0;
 
     public EventHall(String resID, int day, int month, int year,
-                     Customer guest, int maxCapacity, int sizeInSqFt, boolean hasStage) {
+                     Customer guest, int maxCapacity, int sizeInSqFt, boolean hasStage)throws InvalidDateException {
         super(resID, day, month, year, PRICE_PER_SQFT, guest, maxCapacity, sizeInSqFt);
         this.hasStage = hasStage;
     }
