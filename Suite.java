@@ -4,7 +4,7 @@ public class Suite extends Room implements ComesWithDesignatedParking {
 
     public Suite(String resID, int day, int month, int year,
                  Customer guest, int beds, String roomNumber,
-                 int numberOfNights, boolean hasBalcony) {
+                 int numberOfNights, boolean hasBalcony) throws InvalidDateException {
         super(resID, day, month, year, BASE_PRICE_PER_NIGHT, guest, beds, roomNumber, numberOfNights);
         this.hasBalcony = hasBalcony;
     }
