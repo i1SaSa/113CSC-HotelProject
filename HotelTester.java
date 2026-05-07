@@ -150,19 +150,34 @@ public class HotelTester {
             case 1:
                 System.out.print("Has Mini Fridge? (y/n): ");
                 boolean fridge = sc.nextLine().trim().equalsIgnoreCase("y");
-                res = new RegularRoom(resID, day, month, year, guest, beds, roomNum, nights, fridge);
+                try {
+                    res = new RegularRoom(resID, day, month, year, guest, beds, roomNum, nights, fridge);
+                } catch (InvalidDateException e) {
+                    System.out.println("Error: Invalid date.");
+                    return;
+                }
                 break;
             case 2:
                 System.out.print("Has Kitchenette? (y/n): ");
                 boolean kitchen = sc.nextLine().trim().equalsIgnoreCase("y");
-                res = new FamilyRoom(resID, day, month, year, guest, beds, roomNum, nights, kitchen);
+                try {
+                    res = new FamilyRoom(resID, day, month, year, guest, beds, roomNum, nights, kitchen);
+                } catch (InvalidDateException e) {
+                    System.out.println("Error: Invalid date.");
+                    return;
+                }
                 break;
             case 3:
                 System.out.print("Has Balcony? (y/n): ");
                 boolean balcony = sc.nextLine().trim().equalsIgnoreCase("y");
-                Suite suite = new Suite(resID, day, month, year, guest, beds, roomNum, nights, balcony);
-                suite.assignParking();
-                res = suite;
+                try {
+                    Suite suite = new Suite(resID, day, month, year, guest, beds, roomNum, nights, balcony);
+                    suite.assignParking();
+                    res = suite;
+                } catch (InvalidDateException e) {
+                    System.out.println("Error: Invalid date.");
+                    return;
+                }
                 break;
             default:
                 System.out.println("Invalid room type.");
@@ -192,12 +207,23 @@ public class HotelTester {
         Reservation res = null;
         switch (type) {
             case 1:
-                res = new Lobby(resID, day, month, year, guest, cap, size);
+                try {
+                                    res = new Lobby(resID, day, month, year, guest, cap, size);
+
+                } catch (InvalidDateException e) {
+                    System.out.println("Error: Invalid date.");
+                    return;
+                }
                 break;
             case 2:
                 System.out.print("Has Stage? (y/n): ");
                 boolean stage = sc.nextLine().trim().equalsIgnoreCase("y");
-                res = new EventHall(resID, day, month, year, guest, cap, size, stage);
+                try {
+                    res = new EventHall(resID, day, month, year, guest, cap, size, stage);
+                } catch (InvalidDateException e) {
+                    System.out.println("Error: Invalid date.");
+                    return;
+                }
                 break;
             default:
                 System.out.println("Invalid type.");
