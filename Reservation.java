@@ -1,17 +1,23 @@
+import java.time.LocalDate;
 public abstract class Reservation {
     protected String resID;
     protected double price;
     protected char status;
     protected Customer guest;
-    protected Date date;
+    protected simpleDate date;
     // Possible status: A (Active), R (Refunded), C (Cancelled), F (Finished)
 
-    public Reservation(String resID, int day, int month, int year, double price, Customer guest) {
+    public Reservation(String resID, int day, int month, int year, double price, Customer guest)
+    throws InvalidDateException {
         this.resID = resID;
-        this.date = new Date(day, month, year);
         this.price = price;
         this.status = 'A';
         this.guest = guest;
+if(LocalDate.of(year, month, day).isAfter(LocalDate.now())) {
+        this.date = new simpleDate(day, month, year);
+        } else {
+            throw new InvalidDateException("Invalid date provided for reservation.");
+        }
     }
 
     public String getResID() { return resID; }
@@ -31,8 +37,8 @@ public abstract class Reservation {
     public Customer getGuest() { return guest; }
     public void setGuest(Customer guest) { this.guest = guest; }
 
-    public Date getDate() { return date; }
-    public void setDate(int day, int month, int year) { this.date = new Date(day, month, year); }
+    public simpleDate getDate() { return date; }
+    public void setDate(int day, int month, int year) { this.date = new simpleDate(day, month, year); }
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
