@@ -278,6 +278,7 @@ public class inputgui extends JFrame {
                 }
 
                 if (resObj != null && hotel.addReservation(resObj)) outputArea.append("Success: Res " + id + " added.\n");
+                    else outputArea.append("Error: Could not add reservation.\n");
             } catch (Exception ex) {
                 outputArea.append("Input Error: Check numbers/dates.\n");
             }
