@@ -1,4 +1,6 @@
-public class HotelSystem {
+import java.io.*;
+
+public class HotelSystem implements java.io.Serializable {
     private Reservation[] reservations;
     private int numOfRes;
     private Customer[] customers;
@@ -42,9 +44,31 @@ public class HotelSystem {
         return false;
     }
 
+public void saveData() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("hotel_data.ser"))) {
+            oos.writeObject(this);
+            System.out.println("Data saved successfully.");
+            oos.close();
+        } catch (IOException e) {
+            System.out.println("Error saving data: " + e.getMessage());
+        }
+    }
+    public void loadData() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("hotel_data.ser"))) {
+            HotelSystem loadedSystem = (HotelSystem) ois.readObject();
+            this.reservations = loadedSystem.reservations;
+            this.numOfRes = loadedSystem.numOfRes;
+            this.customers = loadedSystem.customers;
+            this.numOfCustomers = loadedSystem.numOfCustomers;
+            System.out.println("Data loaded successfully.");
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading data: " + e.getMessage());
+        }}
+
     public Customer searchCustomer(String name) {
         for (int i = 0; i < numOfCustomers; i++) {
-            if (customers[i].getName().equals(name)) {
+            if (customers[i].getName().equals(name)){
                 return customers[i];
             }
         }
