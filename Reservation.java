@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-public abstract class Reservation {
+public abstract class Reservation implements java.io.Serializable {
     protected String resID;
     protected double price;
     protected char status;
