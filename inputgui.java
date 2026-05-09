@@ -202,6 +202,20 @@ public class inputgui extends JFrame {
         JButton resbutton = new JButton("Add Reservation");
         resbutton.setBounds(10, 200, 150, 23);
         contentPane.add(resbutton);
+        JButton saveButton = new JButton("save");
+        saveButton.setBounds(170, 200, 150, 23);
+        contentPane.add(saveButton);
+        saveButton.addActionListener(e -> {
+            hotel.saveData();
+            outputArea.append("Data saved successfully.\n");
+        });
+        JButton loadButton = new JButton("load");
+        loadButton.setBounds(330, 200, 150, 23);
+        contentPane.add(loadButton);
+        loadButton.addActionListener(e -> {
+            hotel.loadData();
+            outputArea.append("Data loaded successfully.\n");
+        });
 
         // --- VISIBILITY LOGIC ---
         resdropdown.addActionListener(e -> {
@@ -278,7 +292,7 @@ public class inputgui extends JFrame {
                 }
 
                 if (resObj != null && hotel.addReservation(resObj)) outputArea.append("Success: Res " + id + " added.\n");
-                    else outputArea.append("Error: Could not add reservation.\n");
+                else outputArea.append("Error: Could not add reservation.\n");
             } catch (Exception ex) {
                 outputArea.append("Input Error: Check numbers/dates.\n");
             }
