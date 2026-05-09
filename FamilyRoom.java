@@ -6,7 +6,7 @@ public class FamilyRoom extends Room {
 
     public FamilyRoom(String resID, int day, int month, int year,
                       Customer guest, int beds, String roomNumber,
-                      int numberOfNights, boolean hasKitchenette) {
+                      int numberOfNights, boolean hasKitchenette) throws InvalidDateException {
         super(resID, day, month, year, BASE_PRICE_PER_NIGHT, guest, beds, roomNumber, numberOfNights);
         this.hasKitchenette = hasKitchenette;
         this.extraCots = 0;
