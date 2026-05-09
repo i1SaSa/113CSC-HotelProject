@@ -1,4 +1,4 @@
-public class Customer implements ComesWithDesignatedParking {
+public class Customer implements ComesWithDesignatedParking, java.io.Serializable {
     private String name;
     private String phone;
 
