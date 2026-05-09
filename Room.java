@@ -5,7 +5,7 @@ public abstract class Room extends Reservation {
     protected int numberOfNights;
 
     public Room(String resID, int day, int month, int year, double price,
-                Customer guest, int beds, String roomNumber, int numberOfNights) {
+                Customer guest, int beds, String roomNumber, int numberOfNights) throws InvalidDateException {
         super(resID, day, month, year, price, guest);
         this.beds = beds;
         this.roomNumber = roomNumber;
