@@ -1,23 +1,33 @@
-public abstract class Reservation {
+
+public abstract class Reservation implements java.io.Serializable{
+
     protected String resID;
     protected double price;
     protected char status;
     protected Customer guest;
-    protected Date date;
+    protected SimpleDate date;
     // Possible status: A (Active), R (Refunded), C (Cancelled), F (Finished)
 
     public Reservation(String resID, int day, int month, int year, double price, Customer guest) {
         this.resID = resID;
-        this.date = new Date(day, month, year);
+        this.date = new SimpleDate(day, month, year);
         this.price = price;
         this.status = 'A';
         this.guest = guest;
     }
 
-    public String getResID() { return resID; }
-    public void setResID(String resID) { this.resID = resID; }
+    public String getResID() {
+        return resID;
+    }
 
-    public char getStatus() { return status; }
+    public void setResID(String resID) {
+        this.resID = resID;
+    }
+
+    public char getStatus() {
+        return status;
+    }
+
     public void setStatus(char status) {
         status = Character.toUpperCase(status);
         if ("ARCF".indexOf(status) != -1) {
@@ -28,14 +38,29 @@ public abstract class Reservation {
         }
     }
 
-    public Customer getGuest() { return guest; }
-    public void setGuest(Customer guest) { this.guest = guest; }
+    public Customer getGuest() {
+        return guest;
+    }
 
-    public Date getDate() { return date; }
-    public void setDate(int day, int month, int year) { this.date = new Date(day, month, year); }
+    public void setGuest(Customer guest) {
+        this.guest = guest;
+    }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public SimpleDate getDate() {
+        return date;
+    }
+
+    public void setDate(int day, int month, int year) {
+        this.date = new SimpleDate(day, month, year);
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     // Polymorphic abstract method — each subclass calculates price differently
     public abstract double calculatePrice();

@@ -1,19 +1,32 @@
-public abstract class EventSpace extends Reservation {
+
+public abstract class EventSpace extends Reservation implements java.io.Serializable {
+
     protected int maxCapacity;
     protected int sizeInSqFt;
 
     public EventSpace(String resID, int day, int month, int year, double price,
-                      Customer guest, int maxCapacity, int sizeInSqFt) {
+            Customer guest, int maxCapacity, int sizeInSqFt) throws
+            InvalidDateException {
         super(resID, day, month, year, price, guest);
         this.maxCapacity = maxCapacity;
         this.sizeInSqFt = sizeInSqFt;
     }
 
-    public int getMaxCapacity() { return maxCapacity; }
-    public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
 
-    public int getSizeInSqFt() { return sizeInSqFt; }
-    public void setSizeInSqFt(int sizeInSqFt) { this.sizeInSqFt = sizeInSqFt; }
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public int getSizeInSqFt() {
+        return sizeInSqFt;
+    }
+
+    public void setSizeInSqFt(int sizeInSqFt) {
+        this.sizeInSqFt = sizeInSqFt;
+    }
 
     @Override
     public abstract double calculatePrice();

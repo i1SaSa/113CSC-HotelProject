@@ -1,16 +1,23 @@
-public class Suite extends Room implements ComesWithDesignatedParking {
+
+public class Suite extends Room implements ComesWithDesignatedParking, java.io.Serializable {
+
     private boolean hasBalcony;
     private static final double BASE_PRICE_PER_NIGHT = 1200.0;
 
     public Suite(String resID, int day, int month, int year,
-                 Customer guest, int beds, String roomNumber,
-                 int numberOfNights, boolean hasBalcony) throws InvalidDateException {
+            Customer guest, int beds, String roomNumber,
+            int numberOfNights, boolean hasBalcony) throws InvalidDateException {
         super(resID, day, month, year, BASE_PRICE_PER_NIGHT, guest, beds, roomNumber, numberOfNights);
         this.hasBalcony = hasBalcony;
     }
 
-    public boolean isHasBalcony() { return hasBalcony; }
-    public void setHasBalcony(boolean hasBalcony) { this.hasBalcony = hasBalcony; }
+    public boolean isHasBalcony() {
+        return hasBalcony;
+    }
+
+    public void setHasBalcony(boolean hasBalcony) {
+        this.hasBalcony = hasBalcony;
+    }
 
     @Override
     public void assignParking() {
@@ -20,7 +27,9 @@ public class Suite extends Room implements ComesWithDesignatedParking {
     @Override
     public double calculatePrice() {
         double total = price * numberOfNights;
-        if (hasBalcony) total += 300 * numberOfNights;
+        if (hasBalcony) {
+            total += 300 * numberOfNights;
+        }
         return total;
     }
 

@@ -1,20 +1,29 @@
-public class EventHall extends EventSpace {
+
+public class EventHall extends EventSpace implements java.io.Serializable {
+
     private boolean hasStage;
     private static final double PRICE_PER_SQFT = 20.0;
 
     public EventHall(String resID, int day, int month, int year,
-                     Customer guest, int maxCapacity, int sizeInSqFt, boolean hasStage)throws InvalidDateException {
+            Customer guest, int maxCapacity, int sizeInSqFt, boolean hasStage) throws InvalidDateException {
         super(resID, day, month, year, PRICE_PER_SQFT, guest, maxCapacity, sizeInSqFt);
         this.hasStage = hasStage;
     }
 
-    public boolean isHasStage() { return hasStage; }
-    public void setHasStage(boolean hasStage) { this.hasStage = hasStage; }
+    public boolean isHasStage() {
+        return hasStage;
+    }
+
+    public void setHasStage(boolean hasStage) {
+        this.hasStage = hasStage;
+    }
 
     @Override
     public double calculatePrice() {
         double total = price * sizeInSqFt;
-        if (hasStage) total += 2000;
+        if (hasStage) {
+            total += 2000;
+        }
         return total;
     }
 

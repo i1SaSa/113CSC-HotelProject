@@ -1,8 +1,10 @@
-public class Lobby extends EventSpace {
+
+public class Lobby extends EventSpace implements java.io.Serializable {
+
     private static final double PRICE_PER_SQFT = 10.0;
 
     public Lobby(String resID, int day, int month, int year,
-                 Customer guest, int maxCapacity, int sizeInSqFt) throws InvalidDateException {
+            Customer guest, int maxCapacity, int sizeInSqFt) throws InvalidDateException {
         super(resID, day, month, year, PRICE_PER_SQFT, guest, maxCapacity, sizeInSqFt);
     }
 

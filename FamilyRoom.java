@@ -1,20 +1,30 @@
-public class FamilyRoom extends Room {
+
+public class FamilyRoom extends Room implements java.io.Serializable {
+
     private boolean hasKitchenette;
     private int extraCots;
     private static final double BASE_PRICE_PER_NIGHT = 500.0;
     private static final double COT_PRICE = 75.0;
 
     public FamilyRoom(String resID, int day, int month, int year,
-                      Customer guest, int beds, String roomNumber,
-                      int numberOfNights, boolean hasKitchenette) throws InvalidDateException {
+            Customer guest, int beds, String roomNumber,
+            int numberOfNights, boolean hasKitchenette) throws InvalidDateException {
         super(resID, day, month, year, BASE_PRICE_PER_NIGHT, guest, beds, roomNumber, numberOfNights);
         this.hasKitchenette = hasKitchenette;
         this.extraCots = 0;
     }
 
-    public boolean isHasKitchenette() { return hasKitchenette; }
-    public void setHasKitchenette(boolean hasKitchenette) { this.hasKitchenette = hasKitchenette; }
-    public int getExtraCots() { return extraCots; }
+    public boolean isHasKitchenette() {
+        return hasKitchenette;
+    }
+
+    public void setHasKitchenette(boolean hasKitchenette) {
+        this.hasKitchenette = hasKitchenette;
+    }
+
+    public int getExtraCots() {
+        return extraCots;
+    }
 
     public void addCot() {
         extraCots++;
@@ -24,7 +34,9 @@ public class FamilyRoom extends Room {
     @Override
     public double calculatePrice() {
         double total = price * numberOfNights;
-        if (hasKitchenette) total += 100 * numberOfNights;
+        if (hasKitchenette) {
+            total += 100 * numberOfNights;
+        }
         total += extraCots * COT_PRICE * numberOfNights;
         return total;
     }

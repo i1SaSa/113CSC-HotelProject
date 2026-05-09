@@ -1,11 +1,13 @@
-public abstract class Room extends Reservation {
+
+public abstract class Room extends Reservation implements java.io.Serializable {
+
     protected int beds;
     protected String roomNumber;
     protected boolean isOccupied;
     protected int numberOfNights;
 
     public Room(String resID, int day, int month, int year, double price,
-                Customer guest, int beds, String roomNumber, int numberOfNights) {
+            Customer guest, int beds, String roomNumber, int numberOfNights) {
         super(resID, day, month, year, price, guest);
         this.beds = beds;
         this.roomNumber = roomNumber;
@@ -13,17 +15,37 @@ public abstract class Room extends Reservation {
         this.isOccupied = false;
     }
 
-    public int getBeds() { return beds; }
-    public void setBeds(int beds) { this.beds = beds; }
+    public int getBeds() {
+        return beds;
+    }
 
-    public String getRoomNumber() { return roomNumber; }
-    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
+    public void setBeds(int beds) {
+        this.beds = beds;
+    }
 
-    public boolean isOccupied() { return isOccupied; }
-    public void setOccupied(boolean isOccupied) { this.isOccupied = isOccupied; }
+    public String getRoomNumber() {
+        return roomNumber;
+    }
 
-    public int getNumberOfNights() { return numberOfNights; }
-    public void setNumberOfNights(int numberOfNights) { this.numberOfNights = numberOfNights; }
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public boolean isOccupied() {
+        return isOccupied;
+    }
+
+    public void setOccupied(boolean isOccupied) {
+        this.isOccupied = isOccupied;
+    }
+
+    public int getNumberOfNights() {
+        return numberOfNights;
+    }
+
+    public void setNumberOfNights(int numberOfNights) {
+        this.numberOfNights = numberOfNights;
+    }
 
     public void checkIn() {
         if (!isOccupied) {
