@@ -368,9 +368,13 @@ public class inputgui extends JFrame {
                     }
                 }
 
-                if (resObj != null && hotel.addReservation(resObj)) {
-                    outputArea.append("System: Reservation " + id + " created successfully.\n");
-                    residbox.setText("");
+                if (resObj != null) {
+                    if (hotel.addReservation(resObj)) {
+                        outputArea.append("System: Reservation " + id + " created successfully.\n");
+                        residbox.setText("");
+                    } else {
+                        outputArea.append("Error: Reservation ID '" + id + "' already exists! Please use a different ID.\n");
+                    }
                 }
 
             } catch (NumberFormatException ex) {
