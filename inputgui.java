@@ -390,8 +390,11 @@ public class inputgui extends JFrame {
 
         // 3. Save Data Action
         saveButton.addActionListener(e -> {
-            hotel.saveData();
-            outputArea.append("System: Data saved to hotel_data.ser.\n");
+            if (hotel.saveData()) {
+                outputArea.append("System: Data saved successfully to hotel_data.ser.\n");
+            } else {
+                outputArea.append("CRITICAL ERROR: Could not save data. Check terminal for details.\n");
+            }
         });
 
         // 4. Load Data Action (Syncs the dropdown)

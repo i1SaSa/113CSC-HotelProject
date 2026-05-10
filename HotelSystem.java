@@ -47,13 +47,17 @@ public class HotelSystem implements java.io.Serializable {
         return false;
     }
 
-    public void saveData() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("hotel_data.ser"))) {
-            oos.writeObject(this);
-            System.out.println("Data saved successfully to hotel_data.ser");
-        } catch (IOException e) {
-            System.out.println("CRITICAL ERROR during save: " + e.getMessage());
-            e.printStackTrace();
+    public boolean saveData() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("hotel_data.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+            return true;
+        } catch (IOException i) {
+            i.printStackTrace();
+            return false;
         }
     }
 
